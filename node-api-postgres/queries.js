@@ -66,7 +66,14 @@ const deleteUser = (request, response) => {
   })
 }
 
-
+const getSecrets = (request, response) => {
+	pool.query('SELECT * FROM secrets', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 module.exports = {
   getUsers,
@@ -74,4 +81,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getSecrets
 }
